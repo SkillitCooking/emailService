@@ -1,0 +1,19 @@
+{
+  "name": "emailservice",
+  "version": "1.0.0",
+  "description": "email service for polling and sending out meal plans",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SkillitCooking/emailService.git"
+  },
+  "author": "Dane Louis Bratz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SkillitCooking/emailService/issues"
+  },
+  "homepage": "https://github.com/SkillitCooking/emailService#readme"
+}
