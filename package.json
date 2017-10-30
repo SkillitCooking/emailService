@@ -19,8 +19,13 @@
   "homepage": "https://github.com/SkillitCooking/emailService#readme",
   "dependencies": {
     "dotenv": "^4.0.0",
+    "handlebars": "^4.0.11",
+    "inline-css": "^2.2.2",
     "knex": "^0.13.0",
     "lodash": "^4.17.4",
+    "nodemailer": "^4.3.1",
+    "nodemailer-postmark-transport": "^1.3.0",
+    "sqlite3": "^3.1.13",
     "winston": "^2.4.0"
   }
 }

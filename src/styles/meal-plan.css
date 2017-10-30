@@ -1,0 +1,12 @@
+h1 {
+    color: blue;
+}
+
+p {
+    text-shadow: 1px 1px 2px black;
+    text-decoration: overline;
+}
+
+ul {
+    list-style: georgian inside;
+}

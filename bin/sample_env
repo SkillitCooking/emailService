@@ -2,3 +2,4 @@ NODE_ENV=development
 DB_CLIENT=sqlite3
 LOG_TO_FILE=false
 DB_CONNECTION=/path/to/db/data/that/has/default/config/value
+POSTMARK_API_KEY=secret
