@@ -13,8 +13,8 @@ try {
     lib.logging.info('POLLING START');
     const db = lib.db.initialize();
     let promises = [];
-    test.array.forEach(data => {
-        promises.push(lib.mailing.sendMail('test.hbs', data, 'dane@skillitcooking.com'));
+    test.sampleMealPlans.forEach(data => {
+        promises.push(lib.mailing.sendMealPlan('mealPlan.hbs', data, 'dane@skillitcooking.com'));
     });
     Promise.all(promises).then(() => {
         lib.logging.info('POLLING END');

@@ -9,6 +9,21 @@ const Handlebars = require('handlebars');
 const logging = require('./logging');
 const inlineCSS = require('inline-css');
 
+//register Handlebars helpers
+Handlebars.registerHelper('ingredientsList', function(ingredients) {
+    return ingredients.reduce((str, ingredient) => {
+        if(!str) return ingredient.nameSingular;
+        else return str + ', ' + ingredient.nameSingular;
+    }, "");
+});
+
+Handlebars.registerHelper('seasoningList', function(seasonings) {
+    return seasonings.reduce((str, seasoning) => {
+        if(!str) return seasoning.name;
+        else return str + ', ' + seasoning.name;
+    }, "");
+});
+
 const transport = nodemailer.createTransport(postmarkTransport({
     auth: {
         apiKey: config.env.postmarkApiKey
@@ -20,6 +35,8 @@ const templateCache = new Map();
 function getStyles(filename) {
     switch(filename) {
         case 'test.hbs':
+            return 'meal-plan.css';
+        case 'mealPlan.hbs':
             return 'meal-plan.css';
         default:
             return 'meal-plan.css';
@@ -73,13 +90,13 @@ function inlineTheCSS(renderedHTML, stylefile) {
     });
 }
 
-function sendMail(templateFile, data, emailAddress) {
+function sendMealPlan(templateFile, data, emailAddress) {
     return new Promise((resolve, reject) => {
         getRenderedHTML(templateFile, data).then(renderedHTML => {
             const mail = {
                 from: 'dane@skillitcooking.com',
                 to: emailAddress,
-                subject: 'Test, son',
+                subject: data.title,
                 text: 'balls',
                 html: renderedHTML
             };
@@ -100,5 +117,5 @@ function sendMail(templateFile, data, emailAddress) {
 }
 
 module.exports = {
-    sendMail
+    sendMealPlan
 };
