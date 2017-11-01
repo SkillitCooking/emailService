@@ -76,4 +76,4 @@ module.exports = {
         testData2
     ],
     sampleMealPlans
-}
+};

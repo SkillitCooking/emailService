@@ -21,6 +21,7 @@
     "dotenv": "^4.0.0",
     "handlebars": "^4.0.11",
     "inline-css": "^2.2.2",
+    "join-js": "^0.4.1",
     "knex": "^0.13.0",
     "lodash": "^4.17.4",
     "nodemailer": "^4.3.1",

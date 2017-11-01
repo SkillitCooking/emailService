@@ -10,18 +10,18 @@ const logging = require('./logging');
 const inlineCSS = require('inline-css');
 
 //register Handlebars helpers
-Handlebars.registerHelper('ingredientsList', function(ingredients) {
+Handlebars.registerHelper('ingredientsList', function (ingredients) {
     return ingredients.reduce((str, ingredient) => {
-        if(!str) return ingredient.nameSingular;
+        if (!str) return ingredient.nameSingular;
         else return str + ', ' + ingredient.nameSingular;
-    }, "");
+    }, '');
 });
 
-Handlebars.registerHelper('seasoningList', function(seasonings) {
+Handlebars.registerHelper('seasoningList', function (seasonings) {
     return seasonings.reduce((str, seasoning) => {
-        if(!str) return seasoning.name;
+        if (!str) return seasoning.name;
         else return str + ', ' + seasoning.name;
-    }, "");
+    }, '');
 });
 
 const transport = nodemailer.createTransport(postmarkTransport({
@@ -33,23 +33,23 @@ const transport = nodemailer.createTransport(postmarkTransport({
 const templateCache = new Map();
 
 function getStyles(filename) {
-    switch(filename) {
-        case 'test.hbs':
-            return 'meal-plan.css';
-        case 'mealPlan.hbs':
-            return 'meal-plan.css';
-        default:
-            return 'meal-plan.css';
+    switch (filename) {
+    case 'test.hbs':
+        return 'meal-plan.css';
+    case 'mealPlan.hbs':
+        return 'meal-plan.css';
+    default:
+        return 'meal-plan.css';
     }
 }
 
 function getTemplate(filename) {
     return new Promise((resolve, reject) => {
         let cachedTemplate = templateCache.get(filename);
-        if(!cachedTemplate) {
+        if (!cachedTemplate) {
             let filepath = path.join(config.env.ROOT, 'templates/' + filename);
             fs.readFile(filepath, (err, data) => {
-                if(err) reject();
+                if (err) reject();
                 data = data.toString();
                 let compiled = Handlebars.compile(data);
                 templateCache.set(filename, compiled);
@@ -73,14 +73,14 @@ function getRenderedHTML(filename, data) {
             });
         }).catch(err => {
             reject(err);
-        })
-    })
+        });
+    });
 }
 
 function inlineTheCSS(renderedHTML, stylefile) {
     return new Promise((resolve, reject) => {
         inlineCSS(renderedHTML, {
-            url: 'file://' + path.resolve(__dirname, '../styles/' + stylefile + '/') 
+            url: 'file://' + path.resolve(__dirname, '../styles/' + stylefile + '/')
         }).then((inlinedHTML) => {
             resolve(inlinedHTML);
         }).catch(err => {
@@ -100,16 +100,16 @@ function sendMealPlan(templateFile, data, emailAddress) {
                 text: 'balls',
                 html: renderedHTML
             };
-            
+
             transport.sendMail(mail, (err, info) => {
-                if(err) {
-                    logging.error(err, "ERROR: SEND MAIL:")
+                if (err) {
+                    logging.error(err, 'ERROR: SEND MAIL:');
                     resolve(err);
                 } else {
                     logging.info(info, 'MAIL SENT:');
                     resolve(info);
                 }
-            });  
+            });
         }).catch(err => {
             reject(err);
         });

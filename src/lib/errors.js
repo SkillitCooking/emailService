@@ -7,7 +7,7 @@ function reportError(e) {
     //process e in some way?
     //This is where sorting and parsing of
     //particular errors worth highlighting would be done
-    logging.error(e, "ERROR: ");
+    logging.error(e, 'ERROR: ');
 }
 
 module.exports = {
