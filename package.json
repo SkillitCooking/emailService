@@ -19,6 +19,7 @@
   "homepage": "https://github.com/SkillitCooking/emailService#readme",
   "dependencies": {
     "dotenv": "^4.0.0",
+    "faker": "^4.1.0",
     "handlebars": "^4.0.11",
     "inline-css": "^2.2.2",
     "join-js": "^0.4.1",

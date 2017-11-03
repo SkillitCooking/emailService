@@ -10,7 +10,7 @@ function initialize() {
             fs.mkdirSync(config.data);
         } catch (e) {
             if(e.code !== 'EEXIST') {
-                throw err;
+                throw e;
             }
         }
     }
