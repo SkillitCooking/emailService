@@ -2,7 +2,7 @@ const faker = require('faker');
 const config = require('../config');
 
 const ingredientIds = require('./5-ingredients').getIngredients().map(i => i.id);
-const seasoningIds = require('./2-seasonings').getIngredients().map(s => s.id);
+const seasoningIds = require('./2-seasonings').getSeasonings().map(s => s.id);
 
 const forSureIndex = faker.random.number(ingredientIds.length - 1);
 
