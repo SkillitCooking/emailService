@@ -21,7 +21,6 @@ exports.seed = function(knex) {
             table.uuid('previous_meal_plan').references('meal_plans.id');
             table.timestamps(true, true);
         })
-        .dropTableIfExists('delvery_preferences')
         .dropTableIfExists('delivery_preferences')
         .createTableIfNotExists('delivery_preferences', function(table) {
             table.uuid('id').unique().primary().notNullable();

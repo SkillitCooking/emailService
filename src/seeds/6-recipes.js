@@ -650,6 +650,7 @@ function getRecipeSeasonings() {
             });
         });
     });
+    return recipeSeasonings;
 }
 
 exports.getRecipes = getRecipes;

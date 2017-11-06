@@ -48,9 +48,9 @@ function addMealPlanSelects(query) {
 
 function fetchDueMealPlans(db) {
     let current = new Date().toISOString();
-    let query = db('meal_plan_emails').where('has_sent', false).where('date_to_send', '<', current);
-    query = addMealPlanJoins(query);
-    return addMealPlanSelects(query);
+    let query = db('meal_plans').select();//let query = db('meal_plan_emails').where('has_sent', false).where('date_to_send', '<', current);
+    //query = addMealPlanJoins(query);
+    return query;//addMealPlanSelects(query);
 }
 
 module.exports = {

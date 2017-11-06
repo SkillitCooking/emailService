@@ -13,15 +13,18 @@ try {
     lib.logging.info('POLLING START');
     const db = lib.db.initialize();
     let promises = [];
-    test.sampleMealPlans.forEach(data => {
+    /*  test.sampleMealPlans.forEach(data => {
         promises.push(lib.mailing.sendMealPlan('mealPlan.hbs', data, 'dane@skillitcooking.com'));
-    });
-    Promise.all(promises).then(() => {
-        lib.logging.info('POLLING END');
+    }); */
+    promises.push(lib.queries.fetchDueMealPlans(db));
+    Promise.all(promises).then((results) => {
+        lib.logging.info('POLLING END', results);
+        process.exit(0);
     }).catch(err => {
         throw new Error(err);
     });
 } catch(e) {
     //handle errors
     lib.errors.reportError(e);
+    process.exit(1);
 }

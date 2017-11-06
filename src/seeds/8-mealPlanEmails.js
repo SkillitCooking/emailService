@@ -2,10 +2,11 @@
 const faker = require('faker');
 const config = require('../config');
 
-const mealPlans = require('./7-mealPlans').getMealPlans();
+const mealPlans = require('./7-mealPlans').getMealPlans;
 const utcNowStr = new Date().toISOString();
 
-const mealPlanEmails = mealPlans.map(mp => {
+
+const mealPlanEmails = mealPlans().map(mp => {
     let mpe = {
         id: faker.random.uuid(),
         dateToSend: mp.delivery_time,
@@ -19,6 +20,7 @@ const mealPlanEmails = mealPlans.map(mp => {
             mpe.dateSent = utcNowStr;
         }
     }
+    return mpe;
 });
 
 function getMealPlanEmails() {
@@ -33,11 +35,11 @@ function getMealPlanEmails() {
 }
 
 exports.getMealPlanEmails = getMealPlanEmails;
-exports.seed = function(knex) {
+exports.seed = function(){};/* exports.seed = function(knex) {
     if(!config.env.isProd) {
         return knex('meal_plan_emails').del()
             .then(() => {
                 return knex('meal_plan_emails').insert(getMealPlanEmails());
             });
     }
-};
+}; */
