@@ -17,11 +17,11 @@ function getSelectQueries(table, prefix, fields) {
  */
 function addMealPlanJoins(query) {
     return query
-        .leftJoin('meal_plans', 'meal_plan_emails.meal_plan', 'meal_plan.id')
-        .leftJoin('users', 'meal_plans.user', 'user.id')
+        .leftJoin('meal_plans', 'meal_plan_emails.meal_plan', 'meal_plans.id')
+        .leftJoin('users', 'meal_plans.user', 'users.id')
         .leftJoin('recipe_meal_plans', 'meal_plans.id', 'recipe_meal_plans.meal_plan')
         .leftJoin('recipes', 'recipe_meal_plans.recipe', 'recipes.id')
-        .leftJoin('steps', 'recipes.id', 'step.recipe')
+        .leftJoin('steps', 'recipes.id', 'steps.recipe')
         .leftJoin('recipe_ingredients', 'recipes.id', 'recipe_ingredients.recipe')
         .leftJoin('ingredients', 'recipe_ingredients.ingredient', 'ingredients.id')
         .leftJoin('ingredient_tags', function() {
@@ -48,9 +48,9 @@ function addMealPlanSelects(query) {
 
 function fetchDueMealPlans(db) {
     let current = new Date().toISOString();
-    let query = db('meal_plans').select();//let query = db('meal_plan_emails').where('has_sent', false).where('date_to_send', '<', current);
-    //query = addMealPlanJoins(query);
-    return query;//addMealPlanSelects(query);
+    let query = db('meal_plan_emails').where('has_sent', false).where('date_to_send', '<', current);
+    query = addMealPlanJoins(query);
+    return addMealPlanSelects(query);
 }
 
 module.exports = {

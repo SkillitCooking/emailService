@@ -35,11 +35,11 @@ function getMealPlanEmails() {
 }
 
 exports.getMealPlanEmails = getMealPlanEmails;
-exports.seed = function(){};/* exports.seed = function(knex) {
+exports.seed = function(knex) {
     if(!config.env.isProd) {
         return knex('meal_plan_emails').del()
             .then(() => {
                 return knex('meal_plan_emails').insert(getMealPlanEmails());
             });
     }
-}; */
+};

@@ -19,7 +19,7 @@ try {
     }); */
     let query = lib.queries.fetchDueMealPlans(db);
     query.then((results) => {
-        //results = joinjs.map(results, relationsMap, lib.constants.MAP_IDS.MEAL_PLANS, lib.constants.PREFIX.MEAL_PLANS + '_');
+        results = joinjs.map(results, relationsMap, lib.constants.MAP_IDS.MEAL_PLANS, lib.constants.PREFIX.MEAL_PLANS + '_');
         lib.logging.info('POLLING END', results);
         process.exit(0);
     }).catch(err => {

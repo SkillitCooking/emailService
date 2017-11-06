@@ -38,9 +38,9 @@ function wrapper() {
                 deliveryTimezone: timezones[faker.random.number(timezones.length - 1)]
             };
             if(faker.random.boolean()) {
-                mealPlan.deliveryTime = faker.date.future();
+                mealPlan.deliveryTime = faker.date.future().toISOString();
             } else {
-                mealPlan.deliveryTime = faker.date.past();
+                mealPlan.deliveryTime = faker.date.past().toISOString();
             }
             mealPlans.push(mealPlan);
         }
