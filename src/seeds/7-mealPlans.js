@@ -47,8 +47,6 @@ function wrapper() {
     }
 
     function getMealPlans() {
-        console.log('mealplans1', mealPlans);
-        
         return mealPlans.map(mp => ({
             id: mp.id,
             user: mp.user,
@@ -60,7 +58,6 @@ function wrapper() {
     }
     
     function getRecipeMealPlans() {
-        console.log('mealplans2', mealPlans);
         let recipeMealPlans = [];
         mealPlans.forEach(mp => {
             mp.recipes.forEach(r => {
