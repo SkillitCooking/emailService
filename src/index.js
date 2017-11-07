@@ -28,8 +28,10 @@ try {
          */
         lib.helpers.getMealPlansForMailing(mailingMealPlans);
         let promises = [];
+        let mpeIds = [];
         mailingMealPlans.forEach(mp => {
             mp.mealPlanEmails.forEach(mpe => {
+                mpeIds.push(mpe.id);
                 switch(mpe.email_type) {
                 case lib.constants.EMAIL_TYPES.DELIVERY_READY:
                     promises
@@ -43,8 +45,14 @@ try {
         });
         Promise.all(promises)
             .then((res) => {
-                lib.logging.info('POLLING END', res); //possibly process res dtl to make it more usable
-                process.exit(0);
+                db('meal_plan_emails').update('has_sent', true).whereIn('id', mpeIds)
+                    .then(() => {
+                        lib.logging.info('POLLING END', res); //possibly process res dtl to make it more usable
+                        process.exit(0);
+                    })
+                    .catch((err) => {
+                        throw new Error(err);
+                    });
             })
             .catch((err) => {
                 throw new Error(err);
