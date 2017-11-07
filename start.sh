@@ -3,4 +3,4 @@
 # uses stored npm to run the email node script
 NPM=$(which npm)
 cd /home/dane/emailService
-$NPM run start >> /home/dane/emailService/logs/dev.log
+$NPM run start >> /home/dane/emailService/logs/cron.log
