@@ -44,9 +44,8 @@ const relationsMap = [
     {
         mapId: MAP_IDS.INGREDIENTS,
         idProperty: {name: 'id', column: PREFIX.INGREDIENTS + '_id'},
-        properties: [...SELECT_FIELDS.INGREDIENTS.map(propWithPrefix(PREFIX.INGREDIENTS))],
-        association: [
-            {name: 'category', mapId: MAP_IDS.TAGS, columnPrefix: PREFIX.INGREDIENT_TAGS + '_'}
+        properties: [...SELECT_FIELDS.INGREDIENTS.map(propWithPrefix(PREFIX.INGREDIENTS)),
+            {name: 'category', column: PREFIX.INGREDIENT_TAGS + '_name'}
         ]
     },
     {

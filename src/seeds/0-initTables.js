@@ -55,7 +55,8 @@ exports.seed = function(knex) {
         .dropTableIfExists('ingredients')
         .createTableIfNotExists('ingredients', function(table) {
             table.uuid('id').unique().primary().notNullable();
-            table.string('name_singular').unique().notNullable();
+            table.string('name_singular').notNullable();
+            table.string('store_keeping_name').notNullable().unique();
             table.string('name_plural').notNullable();
             table.string('description');
             table.boolean('is_composite').defaultTo(false);

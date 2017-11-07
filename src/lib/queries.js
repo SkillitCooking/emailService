@@ -25,8 +25,10 @@ function addMealPlanJoins(query) {
         .leftJoin('recipe_ingredients', 'recipes.id', 'recipe_ingredients.recipe')
         .leftJoin('ingredients', 'recipe_ingredients.ingredient', 'ingredients.id')
         .leftJoin('ingredient_tags', function() {
-            this.on('ingredient_tags.ingredient', '=', 'ingredients.id')
-                .andOn('ingredient_tags.type', '=', TAG_TYPES.CATEGORY);
+            this.on(function() {
+                this.on('ingredient_tags.ingredient', '=', 'ingredients.id');
+                this.andOn('ingredient_tags.type', '=', TAG_TYPES.CATEGORY);
+            });
         })
         .leftJoin('tags', 'ingredient_tags.tag', 'tags.id')
         .leftJoin('recipe_seasonings', 'recipes.id', 'recipe_seasonings.recipe')
@@ -51,6 +53,7 @@ function fetchDueMealPlans(db) {
     let query = db('meal_plan_emails').where('has_sent', false).where('date_to_send', '<', current);
     query = addMealPlanJoins(query);
     return addMealPlanSelects(query);
+    //return db('ingredient_tags').select();
 }
 
 module.exports = {

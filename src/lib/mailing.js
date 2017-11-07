@@ -12,8 +12,8 @@ const inlineCSS = require('inline-css');
 //register Handlebars helpers
 Handlebars.registerHelper('ingredientsList', function (ingredients) {
     return ingredients.reduce((str, ingredient) => {
-        if (!str) return ingredient.nameSingular;
-        else return str + ', ' + ingredient.nameSingular;
+        if (!str) return ingredient.name_singular;
+        else return str + ', ' + ingredient.name_singular;
     }, '');
 });
 

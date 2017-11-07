@@ -2,6 +2,7 @@
 
 const faker = require('faker');
 const config = require('../config');
+const {CATEGORY} = require('../lib/constants').TAG_TYPES;
 
 const units = [...require('./4-units').getUnits().map(u => u.id)];
 const tags = [...require('./3-tags').getTags()];
@@ -11,6 +12,7 @@ const ingredients = [
         id: faker.random.uuid(),
         nameSingular: faker.random.word(),
         namePlural: faker.random.word(),
+        storeKeepingName: faker.random.word(),
         estTotalPrice: faker.random.number({min: 1, max: 15}),
         totalSize: faker.random.number({min: 1, max: 4}),
         isComposite: false,
@@ -23,6 +25,7 @@ const ingredients = [
         id: faker.random.uuid(),
         nameSingular: faker.random.word(),
         namePlural: faker.random.word(),
+        storeKeepingName: faker.random.word(),
         estTotalPrice: faker.random.number({min: 1, max: 15}),
         totalSize: faker.random.number({min: 1, max: 4}),
         isComposite: false,
@@ -35,6 +38,7 @@ const ingredients = [
         id: faker.random.uuid(),
         nameSingular: faker.random.word(),
         namePlural: faker.random.word(),
+        storeKeepingName: faker.random.word(),
         estTotalPrice: faker.random.number({min: 1, max: 15}),
         totalSize: faker.random.number({min: 1, max: 4}),
         isComposite: false,
@@ -47,6 +51,7 @@ const ingredients = [
         id: faker.random.uuid(),
         nameSingular: faker.random.word(),
         namePlural: faker.random.word(),
+        storeKeepingName: faker.random.word(),
         estTotalPrice: faker.random.number({min: 1, max: 15}),
         totalSize: faker.random.number({min: 1, max: 4}),
         isComposite: false,
@@ -59,6 +64,7 @@ const ingredients = [
         id: faker.random.uuid(),
         nameSingular: faker.random.word(),
         namePlural: faker.random.word(),
+        storeKeepingName: faker.random.word(),
         estTotalPrice: faker.random.number({min: 1, max: 15}),
         totalSize: faker.random.number({min: 1, max: 4}),
         isComposite: false,
@@ -71,6 +77,7 @@ const ingredients = [
         id: faker.random.uuid(),
         nameSingular: faker.random.word(),
         namePlural: faker.random.word(),
+        storeKeepingName: faker.random.word(),
         estTotalPrice: faker.random.number({min: 1, max: 15}),
         totalSize: faker.random.number({min: 1, max: 4}),
         isComposite: false,
@@ -83,6 +90,7 @@ const ingredients = [
         id: faker.random.uuid(),
         nameSingular: faker.random.word(),
         namePlural: faker.random.word(),
+        storeKeepingName: faker.random.word(),
         estTotalPrice: faker.random.number({min: 1, max: 15}),
         totalSize: faker.random.number({min: 1, max: 4}),
         isComposite: false,
@@ -95,6 +103,7 @@ const ingredients = [
         id: faker.random.uuid(),
         nameSingular: faker.random.word(),
         namePlural: faker.random.word(),
+        storeKeepingName: faker.random.word(),
         estTotalPrice: faker.random.number({min: 1, max: 15}),
         totalSize: faker.random.number({min: 1, max: 4}),
         isComposite: false,
@@ -106,6 +115,7 @@ const ingredients = [
         id: faker.random.uuid(),
         nameSingular: faker.random.word(),
         namePlural: faker.random.word(),
+        storeKeepingName: faker.random.word(),
         estTotalPrice: faker.random.number({min: 1, max: 15}),
         totalSize: faker.random.number({min: 1, max: 4}),
         isComposite: false,
@@ -121,6 +131,7 @@ function getIngredients() {
         id: i.id,
         name_singular: i.nameSingular,
         name_plural: i.namePlural,
+        store_keeping_name: i.storeKeepingName,
         est_total_price: i.estUnitPrice,
         total_size: i.totalSize,
         is_composite: i.isComposite,
@@ -136,7 +147,8 @@ function getIngredientTags() {
         ingredientTags.push({
             id: faker.random.uuid(),
             ingredient: i.id,
-            tag: i.category.id
+            tag: i.category.id,
+            type: CATEGORY
         });
     });
     return ingredientTags;

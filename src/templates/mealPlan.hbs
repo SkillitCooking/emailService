@@ -3,6 +3,7 @@
         <link rel="stylesheet" href="{{stylefile}}">
     </head>
     <body>
+        <a href="https://www.instacart.com">Order Meow</a>
         {{#if hasOverview}}
         <p>{{overview}}</p>
         <br>
@@ -20,14 +21,14 @@
             {{#each recipes as |recipe|}}
             <h5 class="test">{{recipe.title}}</h5>
             <p>{{recipe.description}}</p>
-            <p><strong>Time: </strong>{{totalTime}} mins total, {{activeTime}} mins active</p>
+            <p><strong>Time: </strong>{{recipe.total_time}} mins total, {{recipe.active_time}} mins active</p>
             {{/each}}
         </div>
         <h1>Instructions</h1>
         <div>
         {{#each recipes as |recipe|}}
             <h5>{{recipe.title}}</h5>
-            <img src="{{recipe.mainImageUrl}}"><br>
+            <img src="{{recipe.main_image_url}}"><br>
             <!--For suggested Seasonings, do we list child seasonings? How do we handle that?-->
             <p><strong>Suggested Seasonings: </strong>{{seasoningList recipe.seasonings}}</p>
             <ol>

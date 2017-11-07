@@ -6,6 +6,7 @@ const logging = require('./logging');
 const mailing = require('./mailing');
 const queries = require('./queries');
 const constants = require('./constants');
+const helpers = require('./helpers');
 
 module.exports = {
     db,
@@ -13,5 +14,6 @@ module.exports = {
     logging,
     mailing,
     queries,
-    constants
+    constants,
+    helpers
 };

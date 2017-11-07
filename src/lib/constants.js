@@ -69,5 +69,11 @@ module.exports = Object.freeze({
     },
     TAG_TYPES: {
         CATEGORY: 'CATEGORY'
+    },
+    EMAIL_TYPES: {
+        DELIVERY_READY: 'DELIVERY_EMAIL'
+    },
+    EMAIL_TEMPLATES: {
+        DELIVERY_READY: 'mealPlan.hbs'
     }
 });

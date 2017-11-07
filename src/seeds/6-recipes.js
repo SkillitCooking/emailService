@@ -22,7 +22,7 @@ const recipes = [
             isFrozen: faker.random.boolean(),
             proportion: faker.random.number({min: 0, max: 10})
         })),
-        seasonings: seasoningIds.slice(1, faker.random.number(seasoningIds.length - 1)),
+        seasonings: seasoningIds.slice(0, faker.random.number({min: 1, max: seasoningIds.length - 1})),
         tags: [],
         steps: [
             {
@@ -72,7 +72,7 @@ const recipes = [
             isFrozen: faker.random.boolean(),
             proportion: faker.random.number({min: 0, max: 10})
         })),
-        seasonings: seasoningIds.slice(1, faker.random.number(seasoningIds.length - 1)),
+        seasonings: seasoningIds.slice(0, faker.random.number({min: 1, max: seasoningIds.length - 1})),
         tags: [],
         steps: [
             {
@@ -116,149 +116,7 @@ const recipes = [
             isFrozen: faker.random.boolean(),
             proportion: faker.random.number({min: 0, max: 10})
         })),
-        seasonings: seasoningIds.slice(1, faker.random.number(seasoningIds.length - 1)),
-        tags: [],
-        steps: [
-            {
-                id: faker.random.uuid(),
-                text: faker.random.words(11),
-                tags: [],
-                order: 1
-            },
-            {
-                id: faker.random.uuid(),
-                text: faker.random.words(11),
-                tags: [],
-                order: 2
-            },
-            {
-                id: faker.random.uuid(),
-                text: faker.random.words(11),
-                tags: [],
-                order: 3
-            },
-            {
-                id: faker.random.uuid(),
-                text: faker.random.words(11),
-                tags: [],
-                order: 4
-            },
-            {
-                id: faker.random.uuid(),
-                text: faker.random.words(11),
-                tags: [],
-                order: 5
-            },
-            {
-                id: faker.random.uuid(),
-                text: faker.random.words(11),
-                tags: [],
-                order: 6
-            },
-            {
-                id: faker.random.uuid(),
-                text: faker.random.words(11),
-                tags: [],
-                order: 7
-            },
-            {
-                id: faker.random.uuid(),
-                text: faker.random.words(11),
-                tags: [],
-                order: 8
-            },
-            {
-                id: faker.random.uuid(),
-                text: faker.random.words(11),
-                tags: [],
-                order: 9
-            }
-        ]
-    },
-    {
-        id: faker.random.uuid(),
-        title: faker.random.word(),
-        description: faker.random.word(15),
-        mainImageUrl: faker.image.imageUrl(),
-        activeTime: faker.random.number({min: 5, max: 20}),
-        totalTime: faker.random.number({min: 20, max: 60}),
-        ingredients: ingredientIds.filter((i, index) => {
-            if(forSureIndex === index) return true;
-            else return faker.random.boolean();
-        }).map(i =>({
-            ingredient: i,
-            isFrozen: faker.random.boolean(),
-            proportion: faker.random.number({min: 0, max: 10})
-        })),
-        seasonings: seasoningIds.slice(1, faker.random.number(seasoningIds.length - 1)),
-        tags: [],
-        steps: [
-            {
-                id: faker.random.uuid(),
-                text: faker.random.words(11),
-                tags: [],
-                order: 1
-            },
-            {
-                id: faker.random.uuid(),
-                text: faker.random.words(11),
-                tags: [],
-                order: 2
-            },
-            {
-                id: faker.random.uuid(),
-                text: faker.random.words(11),
-                tags: [],
-                order: 3
-            },
-            {
-                id: faker.random.uuid(),
-                text: faker.random.words(11),
-                tags: [],
-                order: 4
-            },
-            {
-                id: faker.random.uuid(),
-                text: faker.random.words(11),
-                tags: [],
-                order: 5
-            },
-            {
-                id: faker.random.uuid(),
-                text: faker.random.words(11),
-                tags: [],
-                order: 6
-            },
-            {
-                id: faker.random.uuid(),
-                text: faker.random.words(11),
-                tags: [],
-                order: 7
-            },
-            {
-                id: faker.random.uuid(),
-                text: faker.random.words(11),
-                tags: [],
-                order: 8
-            }
-        ]
-    },
-    {
-        id: faker.random.uuid(),
-        title: faker.random.word(),
-        description: faker.random.word(15),
-        mainImageUrl: faker.image.imageUrl(),
-        activeTime: faker.random.number({min: 5, max: 20}),
-        totalTime: faker.random.number({min: 20, max: 60}),
-        ingredients: ingredientIds.filter((i, index) => {
-            if(forSureIndex === index) return true;
-            else return faker.random.boolean();
-        }).map(i =>({
-            ingredient: i,
-            isFrozen: faker.random.boolean(),
-            proportion: faker.random.number({min: 0, max: 10})
-        })),
-        seasonings: seasoningIds.slice(1, faker.random.number(seasoningIds.length - 1)),
+        seasonings: seasoningIds.slice(0, faker.random.number({min: 1, max: seasoningIds.length - 1})),
         tags: [],
         steps: [
             {
@@ -332,7 +190,7 @@ const recipes = [
             isFrozen: faker.random.boolean(),
             proportion: faker.random.number({min: 0, max: 10})
         })),
-        seasonings: seasoningIds.slice(1, faker.random.number(seasoningIds.length - 1)),
+        seasonings: seasoningIds.slice(0, faker.random.number({min: 1, max: seasoningIds.length - 1})),
         tags: [],
         steps: [
             {
@@ -370,6 +228,18 @@ const recipes = [
                 text: faker.random.words(11),
                 tags: [],
                 order: 6
+            },
+            {
+                id: faker.random.uuid(),
+                text: faker.random.words(11),
+                tags: [],
+                order: 7
+            },
+            {
+                id: faker.random.uuid(),
+                text: faker.random.words(11),
+                tags: [],
+                order: 8
             }
         ]
     },
@@ -388,7 +258,7 @@ const recipes = [
             isFrozen: faker.random.boolean(),
             proportion: faker.random.number({min: 0, max: 10})
         })),
-        seasonings: seasoningIds.slice(1, faker.random.number(seasoningIds.length - 1)),
+        seasonings: seasoningIds.slice(0, faker.random.number({min: 1, max: seasoningIds.length - 1})),
         tags: [],
         steps: [
             {
@@ -462,7 +332,63 @@ const recipes = [
             isFrozen: faker.random.boolean(),
             proportion: faker.random.number({min: 0, max: 10})
         })),
-        seasonings: seasoningIds.slice(1, faker.random.number(seasoningIds.length - 1)),
+        seasonings: seasoningIds.slice(0, faker.random.number({min: 1, max: seasoningIds.length - 1})),
+        tags: [],
+        steps: [
+            {
+                id: faker.random.uuid(),
+                text: faker.random.words(11),
+                tags: [],
+                order: 1
+            },
+            {
+                id: faker.random.uuid(),
+                text: faker.random.words(11),
+                tags: [],
+                order: 2
+            },
+            {
+                id: faker.random.uuid(),
+                text: faker.random.words(11),
+                tags: [],
+                order: 3
+            },
+            {
+                id: faker.random.uuid(),
+                text: faker.random.words(11),
+                tags: [],
+                order: 4
+            },
+            {
+                id: faker.random.uuid(),
+                text: faker.random.words(11),
+                tags: [],
+                order: 5
+            },
+            {
+                id: faker.random.uuid(),
+                text: faker.random.words(11),
+                tags: [],
+                order: 6
+            }
+        ]
+    },
+    {
+        id: faker.random.uuid(),
+        title: faker.random.word(),
+        description: faker.random.word(15),
+        mainImageUrl: faker.image.imageUrl(),
+        activeTime: faker.random.number({min: 5, max: 20}),
+        totalTime: faker.random.number({min: 20, max: 60}),
+        ingredients: ingredientIds.filter((i, index) => {
+            if(forSureIndex === index) return true;
+            else return faker.random.boolean();
+        }).map(i =>({
+            ingredient: i,
+            isFrozen: faker.random.boolean(),
+            proportion: faker.random.number({min: 0, max: 10})
+        })),
+        seasonings: seasoningIds.slice(0, faker.random.number({min: 1, max: seasoningIds.length - 1})),
         tags: [],
         steps: [
             {
@@ -536,7 +462,81 @@ const recipes = [
             isFrozen: faker.random.boolean(),
             proportion: faker.random.number({min: 0, max: 10})
         })),
-        seasonings: seasoningIds.slice(1, faker.random.number(seasoningIds.length - 1)),
+        seasonings: seasoningIds.slice(0, faker.random.number({min: 1, max: seasoningIds.length - 1})),
+        tags: [],
+        steps: [
+            {
+                id: faker.random.uuid(),
+                text: faker.random.words(11),
+                tags: [],
+                order: 1
+            },
+            {
+                id: faker.random.uuid(),
+                text: faker.random.words(11),
+                tags: [],
+                order: 2
+            },
+            {
+                id: faker.random.uuid(),
+                text: faker.random.words(11),
+                tags: [],
+                order: 3
+            },
+            {
+                id: faker.random.uuid(),
+                text: faker.random.words(11),
+                tags: [],
+                order: 4
+            },
+            {
+                id: faker.random.uuid(),
+                text: faker.random.words(11),
+                tags: [],
+                order: 5
+            },
+            {
+                id: faker.random.uuid(),
+                text: faker.random.words(11),
+                tags: [],
+                order: 6
+            },
+            {
+                id: faker.random.uuid(),
+                text: faker.random.words(11),
+                tags: [],
+                order: 7
+            },
+            {
+                id: faker.random.uuid(),
+                text: faker.random.words(11),
+                tags: [],
+                order: 8
+            },
+            {
+                id: faker.random.uuid(),
+                text: faker.random.words(11),
+                tags: [],
+                order: 9
+            }
+        ]
+    },
+    {
+        id: faker.random.uuid(),
+        title: faker.random.word(),
+        description: faker.random.word(15),
+        mainImageUrl: faker.image.imageUrl(),
+        activeTime: faker.random.number({min: 5, max: 20}),
+        totalTime: faker.random.number({min: 20, max: 60}),
+        ingredients: ingredientIds.filter((i, index) => {
+            if(forSureIndex === index) return true;
+            else return faker.random.boolean();
+        }).map(i =>({
+            ingredient: i,
+            isFrozen: faker.random.boolean(),
+            proportion: faker.random.number({min: 0, max: 10})
+        })),
+        seasonings: seasoningIds.slice(0, faker.random.number({min: 1, max: seasoningIds.length - 1})),
         tags: [],
         steps: [
             {

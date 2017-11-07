@@ -19,7 +19,6 @@ const timezones = [
 
 const NUMBER_MEAL_PLANS = 10;
 const mealPlans = [];
-console.log('here');
 
 function wrapper() {
 

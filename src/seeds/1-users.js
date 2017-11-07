@@ -10,7 +10,7 @@ const users = [
         username: faker.random.word(),
         id: faker.random.uuid(),
         isAdmin: false,
-        email: faker.internet.email(),
+        email: 'mike@skillitcooking.com',
         address: {
             street: faker.address.streetAddress(),
             city: faker.address.city(),
@@ -29,7 +29,7 @@ const users = [
         username: faker.random.word(),
         id: faker.random.uuid(),
         isAdmin: false,
-        email: faker.internet.email(),
+        email: 'danebratz@gmail.com',
         address: {
             street: faker.address.streetAddress(),
             city: faker.address.city(),
@@ -48,7 +48,7 @@ const users = [
         username: faker.random.word(),
         id: faker.random.uuid(),
         isAdmin: false,
-        email: faker.internet.email(),
+        email: 'mikejlaz@gmail.com',
         address: {
             street: faker.address.streetAddress(),
             city: faker.address.city(),
@@ -67,7 +67,7 @@ const users = [
         username: faker.random.word(),
         id: faker.random.uuid(),
         isAdmin: false,
-        email: faker.internet.email(),
+        email: 'mike@freshwaterdesigncollective.com',
         address: {
             street: faker.address.streetAddress(),
             city: faker.address.city(),
