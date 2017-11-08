@@ -27,7 +27,7 @@ function addMealPlanJoins(query) {
         .leftJoin('ingredient_tags', function() {
             this.on(function() {
                 this.on('ingredient_tags.ingredient', '=', 'ingredients.id');
-                //this.andOn('ingredient_tags.type', '=', TAG_TYPES.CATEGORY);
+                this.where('ingredient_tags.type', '=', TAG_TYPES.CATEGORY);
             });
         })
         .leftJoin('tags', 'ingredient_tags.tag', 'tags.id')
