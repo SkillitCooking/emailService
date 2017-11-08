@@ -27,7 +27,7 @@ function addMealPlanJoins(query) {
         .leftJoin('ingredient_tags', function() {
             this.on(function() {
                 this.on('ingredient_tags.ingredient', '=', 'ingredients.id');
-                this.andOn('ingredient_tags.type', '=', TAG_TYPES.CATEGORY);
+                //this.andOn('ingredient_tags.type', '=', TAG_TYPES.CATEGORY);
             });
         })
         .leftJoin('tags', 'ingredient_tags.tag', 'tags.id')
@@ -56,6 +56,13 @@ function fetchDueMealPlans(db) {
     //return db('ingredient_tags').select();
 }
 
+function fetchOneMealPlan(db) {
+    let query = db('meal_plan_emails').where('meal_plan_emails.meal_plan', '=', 'f78d1a2f-a860-4928-8bfa-ba403eae717e');
+    query = addMealPlanJoins(query);
+    return addMealPlanSelects(query);
+}
+
 module.exports = {
-    fetchDueMealPlans
+    fetchDueMealPlans,
+    fetchOneMealPlan
 };

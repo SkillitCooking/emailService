@@ -25,7 +25,9 @@ if(DB_CLIENT && DB_CLIENT !== 'sqlite3') {
 }
 
 module.exports = {
-    development: Object.assign({}, options),
+    development: Object.assign({}, options, {
+        connection: DB_CONNECTION || path.join(ROOT, 'data/dev.sqlite3')
+    }),
     test: Object.assign({}, options, {
         connection: DB_CONNECTION || path.join(ROOT, 'data/test.sqlite3')
     }),
