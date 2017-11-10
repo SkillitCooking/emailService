@@ -21,7 +21,7 @@ try {
             let mealPlan = joinjs.mapOne(results, relationsMap, lib.constants.MAP_IDS.MEAL_PLANS, lib.constants.PREFIX.MEAL_PLANS + '_');
             lib.helpers.getMealPlansForMailing([mealPlan]);
             //save to text as json
-            fs.writeFile('test/mealPlan.txt', JSON.stringify(mealPlan), (err) => {
+            fs.writeFile(ROOT + '/src/test/mealPlan.txt', JSON.stringify(mealPlan), (err) => {
                 if(err) lib.logging.error('FS error', err);
                 process.exit(0);
             });
