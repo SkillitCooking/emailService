@@ -11,8 +11,7 @@ if(config.env.logToFile) {
     try {
         fs.mkdirSync(LOGGING_DIR);
     } catch(e) {
-        if(e.code !== 'EEXISTS') {
-            console.log('here', e.code);
+        if(e.code !== 'EEXIST') {
             config.env.logToFile = false;
         }
     }
