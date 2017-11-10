@@ -15,7 +15,6 @@ function getDisplayCategory(category) {
         case CATEGORIES.STARCH:
             return category;
         default:
-            console.log('category', category);
             return CATEGORIES.EXTRAS;
     }
 }
@@ -32,7 +31,6 @@ const getMealPlansForMailing = (mealPlans) => {
             r.ingredients.forEach(i => {
                 //check if ingredient's category in map
                 let displayCategory = getDisplayCategory(i.category);
-                console.log('displayCategory', displayCategory);
                 let ingredientMap = mp.ingredientCategories.get(displayCategory);
                 if(ingredientMap) {
                     ingredientMap.set(i.id, i);
@@ -49,7 +47,6 @@ const getMealPlansForMailing = (mealPlans) => {
         let categoryArray = [];
         let categoryIterable = mp.ingredientCategories.entries();
         for(let entry of categoryIterable) {
-            console.log('entry', entry[0]);
             let categoryObj = {
                 name: entry[0],
                 ingredients: []
