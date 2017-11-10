@@ -19,7 +19,7 @@ try {
     const db = lib.db.initialize();
     if(process.argv.length > 2 && process.argv[2] === 'superTest') {
         cron.schedule('* * * * *', function() {
-            lib.logging.info('BRRRRORORORORO');
+            lib.logging.info('BRRRRORORORORO', config.env.NODE_ENV);
         });
     } else 
     if(config.env.isDev && process.argv.length > 2 && process.argv[2] === 'templateTest'){

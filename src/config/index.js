@@ -18,7 +18,7 @@ const logToFile = LOG_TO_FILE ? LOG_TO_FILE === 'true' : false;
 
 module.exports = {
     env: {
-        isDev, isTest, isProd, dbClient, logToFile, postmarkApiKey, ROOT
+        isDev, isTest, isProd, dbClient, logToFile, postmarkApiKey, ROOT, NODE_ENV
     },
     db: knexfile[NODE_ENV],
     data: path.join(ROOT, '/data')
