@@ -75,5 +75,11 @@ module.exports = Object.freeze({
     },
     EMAIL_TEMPLATES: {
         DELIVERY_READY: 'mealPlan.hbs'
+    },
+    CATEGORIES: {
+        VEGETABLES: 'vegetables',
+        PROTEIN: 'protein',
+        STARCH: 'starch',
+        EXTRAS: 'extras'
     }
 });

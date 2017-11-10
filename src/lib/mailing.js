@@ -8,6 +8,7 @@ const config = require('../config');
 const Handlebars = require('handlebars');
 const logging = require('./logging');
 const inlineCSS = require('inline-css');
+const {CATEGORIES} = require('./constants');
 
 //register Handlebars helpers
 Handlebars.registerHelper('ingredientsList', function (ingredients) {
@@ -24,6 +25,20 @@ Handlebars.registerHelper('seasoningList', function (seasonings) {
     }, '');
 });
 
+Handlebars.registerHelper('pluralizeCategory', function(category) {
+    if(category.ingredients.length > 1) {
+        switch(category.name) {
+            case CATEGORIES.STARCH:
+                return 'starches';
+            case CATEGORIES.PROTEIN:
+                return 'proteins';
+            default:
+                return category.name;
+        }
+    }
+    return category.name;
+});
+
 const transport = nodemailer.createTransport(postmarkTransport({
     auth: {
         apiKey: config.env.postmarkApiKey
@@ -34,12 +49,12 @@ const templateCache = new Map();
 
 function getStyles(filename) {
     switch (filename) {
-    case 'test.hbs':
-        return 'meal-plan.css';
-    case 'mealPlan.hbs':
-        return 'meal-plan.css';
-    default:
-        return 'meal-plan.css';
+        case 'test.hbs':
+            return 'meal-plan.css';
+        case 'mealPlan.hbs':
+            return 'meal-plan.css';
+        default:
+            return 'meal-plan.css';
     }
 }
 

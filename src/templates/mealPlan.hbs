@@ -11,7 +11,7 @@
         <h1>What's In Your Cart</h1>
         <div>
         {{#each ingredientCategories as |category|}}
-            <p><strong>{{category.name}}: </strong>
+            <p><strong>{{pluralizeCategory category}}: </strong>
                 {{ingredientsList category.ingredients}}
             </p>
         {{/each}}
@@ -30,7 +30,9 @@
             <h5>{{recipe.title}}</h5>
             <img src="{{recipe.main_image_url}}"><br>
             <!--For suggested Seasonings, do we list child seasonings? How do we handle that?-->
+            {{#if recipe.seasonings}}
             <p><strong>Suggested Seasonings: </strong>{{seasoningList recipe.seasonings}}</p>
+            {{/if}}
             <ol>
                 {{#each recipe.steps as |step|}}
                 <li>{{step.text}}</li>

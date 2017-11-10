@@ -1,10 +1,24 @@
 'use strict';
 
+const {CATEGORIES} = require('./constants');
+
 const propWithPrefix = (prefixToUse) => {
     return ((prefix, prop) => {
         return {name: prop, column: prefix + '_' + prop};
     }).bind(null, prefixToUse);
 };
+
+function getDisplayCategory(category) {
+    switch(category) {
+        case CATEGORIES.VEGETABLES:
+        case CATEGORIES.PROTEIN:
+        case CATEGORIES.STARCH:
+            return category;
+        default:
+            console.log('category', category);
+            return CATEGORIES.EXTRAS;
+    }
+}
 
 const getMealPlansForMailing = (mealPlans) => {
     mealPlans.forEach(mp => {
@@ -17,13 +31,15 @@ const getMealPlansForMailing = (mealPlans) => {
         mp.recipes.forEach(r => {
             r.ingredients.forEach(i => {
                 //check if ingredient's category in map
-                let ingredientMap = mp.ingredientCategories.get(i.category);
+                let displayCategory = getDisplayCategory(i.category);
+                console.log('displayCategory', displayCategory);
+                let ingredientMap = mp.ingredientCategories.get(displayCategory);
                 if(ingredientMap) {
                     ingredientMap.set(i.id, i);
                 } else {
                     let ingredientMap = new Map();
                     ingredientMap.set(i.id, i);
-                    mp.ingredientCategories.set(i.category, ingredientMap);
+                    mp.ingredientCategories.set(displayCategory, ingredientMap);
                 }
                 //if not in map add, with value as associated Set
                 //if in the map, then just add nameSingulars to associated Set
@@ -33,6 +49,7 @@ const getMealPlansForMailing = (mealPlans) => {
         let categoryArray = [];
         let categoryIterable = mp.ingredientCategories.entries();
         for(let entry of categoryIterable) {
+            console.log('entry', entry[0]);
             let categoryObj = {
                 name: entry[0],
                 ingredients: []

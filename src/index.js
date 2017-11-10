@@ -52,13 +52,13 @@ try {
                 mp.mealPlanEmails.forEach(mpe => {
                     mpeIds.push(mpe.id);
                     switch(mpe.email_type) {
-                    case lib.constants.EMAIL_TYPES.DELIVERY_READY:
-                        promises
-                        //where to get the user emails? mp.user.email...
-                            .push(lib.mailing.sendMealPlan(lib.constants.EMAIL_TEMPLATES.DELIVERY_READY, mp, mp.user.email));
-                        break;
-                    default:
-                        break;    
+                        case lib.constants.EMAIL_TYPES.DELIVERY_READY:
+                            promises
+                            //where to get the user emails? mp.user.email...
+                                .push(lib.mailing.sendMealPlan(lib.constants.EMAIL_TEMPLATES.DELIVERY_READY, mp, mp.user.email));
+                            break;
+                        default:
+                            break;    
                     }
                 });
             });
