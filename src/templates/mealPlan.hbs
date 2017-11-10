@@ -1,45 +1,52 @@
 <html>
     <head>
-        <link rel="stylesheet" href="{{stylefile}}">
+        <link rel="stylesheet" href="{{stylefile}}">        
     </head>
     <body>
-        <a href="https://www.instacart.com">Order Meow</a>
-        {{#if hasOverview}}
-        <p>{{overview}}</p>
-        <br>
-        {{/if}}
-        <h1>What's In Your Cart</h1>
-        <div>
-        {{#each ingredientCategories as |category|}}
-            <p><strong>{{pluralizeCategory category}}: </strong>
-                {{ingredientsList category.ingredients}}
-            </p>
-        {{/each}}
-        </div>
-        <h1>Your Menu</h1>
-        <div>
-            {{#each recipes as |recipe|}}
-            <h5 class="test">{{recipe.title}}</h5>
-            <p>{{recipe.description}}</p>
-            <p><strong>Time: </strong>{{recipe.total_time}} mins total, {{recipe.active_time}} mins active</p>
-            {{/each}}
-        </div>
-        <h1>Instructions</h1>
-        <div>
-        {{#each recipes as |recipe|}}
-            <h5>{{recipe.title}}</h5>
-            <img src="{{recipe.main_image_url}}"><br>
-            <!--For suggested Seasonings, do we list child seasonings? How do we handle that?-->
-            {{#if recipe.seasonings}}
-            <p><strong>Suggested Seasonings: </strong>{{seasoningList recipe.seasonings}}</p>
+        <div class="email-width">
+            {{#if hasOverview}}
+                <p>{{overview}}</p>
+                <br />
             {{/if}}
-            <ol>
-                {{#each recipe.steps as |step|}}
-                <li>{{step.text}}</li>
+
+            <p style="text-align: center;"><a href="https://www.instacart.com"><button class="place-order-button">Place Order</button></a></p>
+            
+            <div class="cart-ingredients">
+                <h1>What's In Your Cart</h1>            
+                {{#each ingredientCategories as |category|}}
+                    <p><span class="category-name">{{pluralizeCategory category}}: </span><span class="category-ingredient">{{ingredientsList category.ingredients}}</span></p>
                 {{/each}}
-            </ol>
-            <br>
-        {{/each}}
+            </div>
+            
+            
+            <div class="recipe-description">
+                <h1>Your Menu</h1>
+                {{#each recipes as |recipe|}}                
+                    <img class="recipe-image" src="{{recipe.main_image_url}}">            
+                    <h5>{{recipe.title}}</h5>
+                    <p>{{recipe.description}}</p>                
+                    <p class="recipe-time"><strong>{{recipe.total_time}}</strong> mins total, <strong>{{recipe.active_time}}</strong> mins active</p>
+                {{/each}}                
+            </div>
+
+            
+            <div class="recipe-instructions">
+                <h1>Instructions</h1>
+                <br />
+                {{#each recipes as |recipe|}}
+                    <h5>{{recipe.title}}</h5>
+                    {{#if recipe.seasonings}}
+                        <!--For suggested Seasonings, do we list child seasonings? How do we handle that?-->
+                        <p><strong>Seasoning: </strong>{{seasoningList recipe.seasonings}}</p>
+                    {{/if}}
+                    <ol>
+                        {{#each recipe.steps as |step|}}
+                            <li>{{step.text}}</li>
+                        {{/each}}
+                    </ol>
+                    <br>
+                {{/each}}
+            </div>
         </div>
     </body>
 </html>

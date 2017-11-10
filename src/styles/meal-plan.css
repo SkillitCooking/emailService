@@ -1,16 +1,67 @@
+p, span, h5, li, a {
+	color: #000000;
+}
 h1 {
-    color: blue;
+	margin: 20px 0 5px;
+	font-size: 25px;
+	/*color: #FC7930;*/
+	color: #000000;
 }
-
+h5 {
+    font-size: 20px;
+    margin: 0;
+}
 p {
-    text-shadow: 1px 1px 2px black;
-    text-decoration: overline;
+	margin: 10px 0;
+	font-size: 15px;
 }
-
-ul {
-    list-style: georgian inside;
+li {
+	margin: 10px 0;
+	font-size: 15px;	
 }
+.cart-ingredients, .recipe-description, .recipe-instructions  {
+	width: 80%;
+	margin-bottom: 20px;
+}
+p.recipe-time {
+	border-bottom: 1px solid;
+    padding-bottom: 10px;
+}
+div.email-width {
+    margin: 0 auto;
+    width: 580px;    
+    background-color: rgba(241, 241, 241, .3);
+    border: 1px solid #333333;
+    padding: 30px 30px 30px 60px;
 
-.test {
-    color: red;
+}
+button.place-order-button {
+	padding: 15px 30px;
+    font-size: 130%;
+    background-color: #43B02A;
+    border: 1px solid #43B02A;
+    color: #ffffff;
+    border-radius: 5px;
+
+}
+.cart-ingredients {
+	text-align: left;
+}
+span.category-name {
+	/*text-transform: capitalize;*/
+	font-size: 120%;
+	font-weight: 600;
+}
+span.category-ingredient {
+	text-transform: lowercase;
+}
+.recipe-description p, .recipe-description h5 {
+	width: 80%;
+}
+.recipe-instructions {
+	text-align: left;
+}
+img.recipe-image {
+	width: 300px;
+	margin: 20px 0 5px;
 }
