@@ -1,7 +1,5 @@
 'use strict';
 
-const cron = require('node-cron');
-
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.resolve(__dirname, '../');
@@ -17,11 +15,6 @@ try {
     //initialize knex
     lib.logging.info('POLLING START');
     const db = lib.db.initialize();
-    if(process.argv.length > 2 && process.argv[2] === 'superTest') {
-        cron.schedule('* * * * *', function() {
-            lib.logging.info('BRRRRORORORORO', config.env.NODE_ENV);
-        });
-    } else 
     if(config.env.isDev && process.argv.length > 2 && process.argv[2] === 'templateTest'){
         /* let query = lib.queries.fetchOneMealPlan(db);
         query.then(results => {
@@ -77,14 +70,17 @@ try {
                             process.exit(0);
                         })
                         .catch((err) => {
-                            throw new Error(err);
+                            lib.errors.reportError(err);
+                            process.exit(1);
                         });
                 })
                 .catch((err) => {
-                    throw new Error(err);
+                    lib.errors.reportError(err);
+                    process.exit(1);
                 });
         }).catch(err => {
-            throw new Error(err);
+            lib.errors.reportError(err);
+            process.exit(1);
         });
     }
 } catch(e) {
