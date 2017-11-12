@@ -35,6 +35,7 @@
                 <br />
                 {{#each recipes as |recipe|}}
                     <h5>{{recipe.title}}</h5>
+                    <p><strong>Ingredients: </strong>{{ingredientsList recipe.ingredients}}</p>
                     {{#if recipe.seasonings}}
                         <!--For suggested Seasonings, do we list child seasonings? How do we handle that?-->
                         <p><strong>Seasoning: </strong>{{seasoningList recipe.seasonings}}</p>

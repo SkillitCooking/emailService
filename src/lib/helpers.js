@@ -19,6 +19,16 @@ function getDisplayCategory(category) {
     }
 }
 
+function recipeCmpFn(recipeA, recipeB) {
+    if(recipeA.order < recipeB.order) {
+        return -1;
+    }
+    if(recipeA.order > recipeB.order) {
+        return 1;
+    }
+    return 0;
+}
+
 const getMealPlansForMailing = (mealPlans) => {
     mealPlans.forEach(mp => {
         if(mp.overview) {
@@ -27,6 +37,7 @@ const getMealPlansForMailing = (mealPlans) => {
             mp.hasOverview = false;
         }
         mp.ingredientCategories = new Map();
+        mp.recipes.sort(recipeCmpFn);
         mp.recipes.forEach(r => {
             r.ingredients.forEach(i => {
                 //check if ingredient's category in map

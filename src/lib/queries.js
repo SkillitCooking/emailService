@@ -38,6 +38,7 @@ function addMealPlanSelects(query) {
     return query
         .select(...getSelectQueries('meal_plan_emails', PREFIX.MEAL_PLAN_EMAILS, SELECT_FIELDS.MEAL_PLAN_EMAILS),
             ...getSelectQueries('meal_plans', PREFIX.MEAL_PLANS, SELECT_FIELDS.MEAL_PLANS),
+            ...getSelectQueries('recipe_meal_plans', PREFIX.RECIPE_MEAL_PLANS, SELECT_FIELDS.RECIPE_MEAL_PLANS),
             ...getSelectQueries('users', PREFIX.USERS, SELECT_FIELDS.USERS),
             ...getSelectQueries('recipes', PREFIX.RECIPES, SELECT_FIELDS.RECIPES),
             ...getSelectQueries('steps', PREFIX.STEPS, SELECT_FIELDS.STEPS),

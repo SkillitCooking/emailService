@@ -6,6 +6,7 @@ module.exports = Object.freeze({
         MEAL_PLAN_EMAILS: 'mpe',
         MEAL_PLANS: 'mp',
         RECIPES: 'r',
+        RECIPE_MEAL_PLANS: 'rmp',
         STEPS: 'st',
         INGREDIENTS: 'i',
         INGREDIENT_TAGS: 'it',
@@ -41,6 +42,10 @@ module.exports = Object.freeze({
             'total_time',
             'active_time',
             'main_image_url'
+        ],
+        RECIPE_MEAL_PLANS: [
+            'id',
+            'order'
         ],
         SEASONINGS: [
             'id',

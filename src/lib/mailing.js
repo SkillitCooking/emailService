@@ -109,10 +109,10 @@ function sendMealPlan(templateFile, data, emailAddress) {
     return new Promise((resolve, reject) => {
         getRenderedHTML(templateFile, data).then(renderedHTML => {
             const mail = {
-                from: 'dane@skillitcooking.com',
+                from: 'mike@skillitcooking.com',
                 to: emailAddress,
                 subject: data.title,
-                text: 'balls',
+                text: '',
                 html: renderedHTML
             };
 

@@ -127,6 +127,7 @@ exports.seed = function(knex) {
             table.uuid('id').unique().primary().notNullable();
             table.uuid('recipe').notNullable().references('recipes.id').onDelete('CASCADE');
             table.uuid('meal_plan').notNullable().references('meal_plans.id').onDelete('CASCADE');
+            table.integer('order');
             table.unique(['recipe', 'meal_plan']);
             table.timestamps(true, true);
         })

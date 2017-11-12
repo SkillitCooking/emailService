@@ -59,11 +59,12 @@ function wrapper() {
     function getRecipeMealPlans() {
         let recipeMealPlans = [];
         mealPlans.forEach(mp => {
-            mp.recipes.forEach(r => {
+            mp.recipes.forEach((r, index) => {
                 recipeMealPlans.push({
                     id: faker.random.uuid(),
                     recipe: r,
-                    meal_plan: mp.id
+                    meal_plan: mp.id,
+                    order: index
                 });
             });
         });

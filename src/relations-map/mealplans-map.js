@@ -29,7 +29,9 @@ const relationsMap = [
     {
         mapId: MAP_IDS.RECIPES,
         idProperty: {name: 'id', column: PREFIX.RECIPES + '_id'},
-        properties: [...SELECT_FIELDS.RECIPES.map(propWithPrefix(PREFIX.RECIPES))],
+        properties: [...SELECT_FIELDS.RECIPES.map(propWithPrefix(PREFIX.RECIPES)),
+            {name: 'order', column: PREFIX.RECIPE_MEAL_PLANS + '_order'}
+        ],
         collections: [
             {name: 'steps', mapId: MAP_IDS.STEPS},
             {name: 'ingredients', mapId: MAP_IDS.INGREDIENTS},
