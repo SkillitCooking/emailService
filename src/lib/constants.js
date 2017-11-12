@@ -85,6 +85,7 @@ module.exports = Object.freeze({
         VEGETABLES: 'vegetables',
         PROTEIN: 'protein',
         STARCH: 'starch',
-        EXTRAS: 'extras'
+        EXTRAS: 'extras',
+        PRODUCE: 'produce'
     }
 });

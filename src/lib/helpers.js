@@ -11,7 +11,9 @@ const propWithPrefix = (prefixToUse) => {
 function getDisplayCategory(category) {
     switch(category) {
         case CATEGORIES.VEGETABLES:
+            return CATEGORIES.PRODUCE;
         case CATEGORIES.PROTEIN:
+        case CATEGORIES.PRODUCE:
         case CATEGORIES.STARCH:
             return category;
         default:
@@ -27,6 +29,18 @@ function recipeCmpFn(recipeA, recipeB) {
         return 1;
     }
     return 0;
+}
+
+function categoryCmpFn(catA, catB) {
+    if(catA.name === catB.name) return 0;
+    if(catA.name === CATEGORIES.PROTEIN) return -1;
+    if(catB.name === CATEGORIES.PROTEIN) return 1;
+    if(catA.name === CATEGORIES.PRODUCE) return -1;
+    if(catB.name === CATEGORIES.PRODUCE) return 1;
+    if(catA.name === CATEGORIES.STARCH) return -1;
+    if(catB.name === CATEGORIES.STARCH) return 1;
+    if(catA.name === CATEGORIES.EXTRAS) return -1;
+    return 1;
 }
 
 const getMealPlansForMailing = (mealPlans) => {
@@ -69,6 +83,7 @@ const getMealPlansForMailing = (mealPlans) => {
             }
             categoryArray.push(categoryObj);
         }
+        categoryArray.sort(categoryCmpFn);
         mp.ingredientCategories = categoryArray;
     });
 };
