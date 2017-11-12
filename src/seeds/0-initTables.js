@@ -5,7 +5,7 @@ exports.seed = function(knex) {
         .createTableIfNotExists('users', function(table) {
             table.uuid('id').unique().primary().notNullable();
             table.string('username').unique().notNullable();
-            table.string('email').unique().notNullable();
+            table.string('email').notNullable();
             table.string('password').notNullable();
             table.boolean('is_admin').notNullable().defaultTo(false);
             table.string('first_name').notNullable().defaultTo('DEFAULT');

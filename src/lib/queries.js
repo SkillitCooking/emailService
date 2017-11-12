@@ -45,7 +45,7 @@ function addMealPlanSelects(query) {
             ...getSelectQueries('seasonings', PREFIX.SEASONINGS, SELECT_FIELDS.SEASONINGS),
             ...getSelectQueries('ingredients', PREFIX.INGREDIENTS, SELECT_FIELDS.INGREDIENTS),
             ...getSelectQueries('tags', PREFIX.INGREDIENT_TAGS, SELECT_FIELDS.INGREDIENT_TAGS)
-        );
+        ).orderBy(PREFIX.STEPS + '_order');
 }
 
 function fetchDueMealPlans(db) {
