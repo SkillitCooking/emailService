@@ -5,23 +5,19 @@ const config = require('../config');
 
 const tags = [
     {
-        name: faker.random.word(),
+        name: 'protein',
         id: faker.random.uuid()
     },
     {
-        name: faker.random.word(),
+        name: 'vegetables',
         id: faker.random.uuid()
     },
     {
-        name: faker.random.word(),
+        name: 'starch',
         id: faker.random.uuid()
     },
     {
-        name: faker.random.word(),
-        id: faker.random.uuid()
-    },
-    {
-        name: faker.random.word(),
+        name: 'sauce/condiment',
         id: faker.random.uuid()
     }
 ];
