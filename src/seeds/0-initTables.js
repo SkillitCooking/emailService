@@ -81,6 +81,7 @@ exports.seed = function(knex) {
             table.string('title').unique().notNullable();
             table.string('description').notNullable();
             table.string('main_image_url').notNullable();
+            table.string('main_link_url');
             table.integer('total_time');
             table.integer('active_time');
             table.timestamps(true, true);
@@ -90,6 +91,7 @@ exports.seed = function(knex) {
             table.uuid('id').unique().primary().notNullable();
             table.uuid('recipe').notNullable().references('recipes.id').onDelete('CASCADE');
             table.string('text').notNullable();
+            table.string('main_link_url');
             table.integer('order').notNullable();
             table.timestamps(true, true);
             table.unique(['recipe', 'order']);

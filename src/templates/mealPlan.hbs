@@ -23,7 +23,7 @@
                 <h1>Your Menu</h1>
                 {{#each recipes as |recipe|}}                
                     <img class="recipe-image" src="{{recipe.main_image_url}}">            
-                    <h5>{{recipe.title}}</h5>
+                    <h5><a href="{{recipe.main_link_url}}">{{recipe.title}}</a></h5>
                     <p>{{recipe.description}}</p>                
                     <p class="recipe-time"><strong>{{recipe.total_time}}</strong> mins total, <strong>{{recipe.active_time}}</strong> mins active</p>
                 {{/each}}                
@@ -42,7 +42,10 @@
                     {{/if}}
                     <ol>
                         {{#each recipe.steps as |step|}}
-                            <li>{{step.text}}</li>
+                            <li>
+                                <p>{{step.text}}</p>
+                                <a href="{{step.main_link_url}}">Link</a>
+                            </li>
                         {{/each}}
                     </ol>
                     <br>

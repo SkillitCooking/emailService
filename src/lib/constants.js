@@ -41,7 +41,8 @@ module.exports = Object.freeze({
             'description',
             'total_time',
             'active_time',
-            'main_image_url'
+            'main_image_url',
+            'main_link_url'
         ],
         RECIPE_MEAL_PLANS: [
             'id',
@@ -62,7 +63,8 @@ module.exports = Object.freeze({
         STEPS: [
             'id',
             'text',
-            'order'
+            'order',
+            'main_link_url'
         ],
         USERS: [
             'id',
