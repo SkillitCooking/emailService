@@ -44,7 +44,9 @@
                         {{#each recipe.steps as |step|}}
                             <li>
                                 <p>{{step.text}}</p>
-                                <a href="{{step.main_link_url}}">Link</a>
+                                {{#if step.main_link_url}}
+                                    <a href="{{step.main_link_url}}">Link</a>
+                                {{/if}}
                             </li>
                         {{/each}}
                     </ol>
