@@ -4,6 +4,7 @@ const {PREFIX, TAG_TYPES, SELECT_FIELDS} = require('./constants');
 
 function getSelectQueries(table, prefix, fields) {
     return fields.map(field => {
+        if(!table) return field + ' as ' + prefix + '_' + field;
         return table + '.' + field + ' as ' + prefix + '_' + field;
     });
 }
@@ -15,9 +16,10 @@ function getSelectQueries(table, prefix, fields) {
  * This wouldn't happen on the joins, but rather on the selects
  * @param {*} query 
  */
-function addMealPlanJoins(query) {
+function addMealPlanJoins(query, isLoadTest) {
+    if(isLoadTest) query.leftJoin('meal_plans', 'T.meal_plan', 'meal_plans.id');
+    else query.leftJoin('meal_plans', 'meal_plan_emails.meal_plan', 'meal_plans.id');
     return query
-        .leftJoin('meal_plans', 'meal_plan_emails.meal_plan', 'meal_plans.id')
         .leftJoin('users', 'meal_plans.user', 'users.id')
         .leftJoin('recipe_meal_plans', 'meal_plans.id', 'recipe_meal_plans.meal_plan')
         .leftJoin('recipes', 'recipe_meal_plans.recipe', 'recipes.id')
@@ -34,9 +36,12 @@ function addMealPlanJoins(query) {
         .leftJoin('seasonings', 'recipe_seasonings.seasoning', 'seasonings.id');
 }
 
-function addMealPlanSelects(query) {
+function addMealPlanSelects(query, isLoadTest) {
+    let mpeSelect;
+    if(isLoadTest) mpeSelect = [];
+    else mpeSelect = getSelectQueries('meal_plan_emails', PREFIX.MEAL_PLAN_EMAILS, SELECT_FIELDS.MEAL_PLAN_EMAILS);
     return query
-        .select(...getSelectQueries('meal_plan_emails', PREFIX.MEAL_PLAN_EMAILS, SELECT_FIELDS.MEAL_PLAN_EMAILS),
+        .select(...mpeSelect,
             ...getSelectQueries('meal_plans', PREFIX.MEAL_PLANS, SELECT_FIELDS.MEAL_PLANS),
             ...getSelectQueries('recipe_meal_plans', PREFIX.RECIPE_MEAL_PLANS, SELECT_FIELDS.RECIPE_MEAL_PLANS),
             ...getSelectQueries('users', PREFIX.USERS, SELECT_FIELDS.USERS),
@@ -57,9 +62,14 @@ function fetchDueMealPlans(db) {
 }
 
 function fetchOneMealPlan(db) {
-    let query = db('meal_plan_emails').where('meal_plan_emails.meal_plan', '=', 'f78d1a2f-a860-4928-8bfa-ba403eae717e');
-    query = addMealPlanJoins(query);
-    return addMealPlanSelects(query);
+    let query = db.with('T', (qb) => {
+        qb.select(db.raw('*, ROW_NUMBER() OVER ' +
+            '(ORDER BY created_at DESC) as rn'))
+            .from('meal_plan_emails');
+    })
+        .select(...getSelectQueries('T', PREFIX.MEAL_PLAN_EMAILS, SELECT_FIELDS.MEAL_PLAN_EMAILS.concat(['rn']))).from('T').where('T.rn', 1);
+    query = addMealPlanJoins(query, true);
+    return addMealPlanSelects(query, true);
 }
 
 module.exports = {

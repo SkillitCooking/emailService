@@ -15,32 +15,47 @@ try {
     //initialize knex
     lib.logging.info('POLLING START');
     const db = lib.db.initialize();
-    if(config.env.isDev && process.argv.length > 2 && process.argv[2] === 'templateTest'){
-        /* let query = lib.queries.fetchOneMealPlan(db);
-        query.then(results => {
-            let mealPlan = joinjs.mapOne(results, relationsMap, lib.constants.MAP_IDS.MEAL_PLANS, lib.constants.PREFIX.MEAL_PLANS + '_');
-            lib.helpers.getMealPlansForMailing([mealPlan]);
-            //save to text as json
-            fs.writeFile(ROOT + '/src/test/mealPlan.txt', JSON.stringify(mealPlan), (err) => {
-                if(err) lib.logging.error('FS error', err);
-                process.exit(0);
-            });
-        }); */
-        fs.readFile(ROOT + '/src/test/mealPlan.txt', 'utf8', (err, data) => {
-            if(err) lib.logging.error('FS error: ', err);
-            else {
-                let mealPlan = JSON.parse(data);
-                lib.mailing.sendMealPlan(lib.constants.EMAIL_TEMPLATES.DELIVERY_READY, mealPlan, 'danebratz@gmail.com')
-                    .then((res) => {
-                        lib.logging.info('good', res);
-                        process.exit(0);
-                    })
-                    .catch(err => {
-                        lib.logging.error('err', err);
+    if(config.env.isDev && process.argv.length > 2) {
+        switch(process.argv[2]) {
+            case 'templateTest': {
+                fs.readFile(ROOT + '/src/test/mealPlan.txt', 'utf8', (err, data) => {
+                    if(err) {
+                        lib.logging.error('FS error: ', err);
                         process.exit(1);
-                    });
+                    }
+                    else {
+                        let mealPlan = JSON.parse(data);
+                        lib.mailing.sendMealPlan(lib.constants.EMAIL_TEMPLATES.DELIVERY_READY, mealPlan, 'danebratz@gmail.com')
+                            .then((res) => {
+                                lib.logging.info('good', res);
+                                process.exit(0);
+                            })
+                            .catch(err => {
+                                lib.logging.error('err', err);
+                                process.exit(1);
+                            });
+                    }
+                });
+                break;
             }
-        });
+            
+            case 'loadTest': {
+                let query = lib.queries.fetchOneMealPlan(db);
+                query.then(results => {
+                    let mealPlan = joinjs.mapOne(results, relationsMap, lib.constants.MAP_IDS.MEAL_PLANS, lib.constants.PREFIX.MEAL_PLANS + '_');
+                    lib.helpers.getMealPlansForMailing([mealPlan]);
+                    //save to text as json
+                    fs.writeFile(ROOT + '/src/test/mealPlan.txt', JSON.stringify(mealPlan), (err) => {
+                        if(err) lib.logging.error('FS error', err);
+                        process.exit(0);
+                    });
+                });
+                break;
+            }
+            default:
+                console.log('unrecognized argument: ', process.argv[2]);
+                process.exit(0); 
+        }
     } else {
         let query = lib.queries.fetchDueMealPlans(db);
         query.then((results) => {
