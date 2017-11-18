@@ -49,6 +49,8 @@ try {
                         if(err) lib.logging.error('FS error', err);
                         process.exit(0);
                     });
+                }).catch(e => {
+                    console.log('error in loadTest: ', e);
                 });
                 break;
             }
