@@ -11,6 +11,49 @@ const config = require('./config');
 const lib = require('./lib');
 const test = require('./test');
 
+function sendMealPlansWithDB(db) {
+    let query = lib.queries.fetchDueMealPlans(db);
+    query.then((results) => {
+        let mailingMealPlans = joinjs.map(results, relationsMap, lib.constants.MAP_IDS.MEAL_PLANS, lib.constants.PREFIX.MEAL_PLANS + '_');
+        lib.helpers.getMealPlansForMailing(mailingMealPlans);
+        let promises = [];
+        let mpeIds = [];
+        mailingMealPlans.forEach(mp => {
+            mp.mealPlanEmails.forEach(mpe => {
+                mpeIds.push(mpe.id);
+                switch(mpe.email_type) {
+                    case lib.constants.EMAIL_TYPES.DELIVERY_READY:
+                        promises
+                        //where to get the user emails? mp.user.email...
+                            .push(lib.mailing.sendMealPlan(lib.constants.EMAIL_TEMPLATES.DELIVERY_READY, mp, mp.user.email));
+                        break;
+                    default:
+                        break;    
+                }
+            });
+        });
+        Promise.all(promises)
+            .then((res) => {
+                db('meal_plan_emails').update('has_sent', true).whereIn('id', mpeIds)
+                    .then(() => {
+                        lib.logging.info('POLLING END', res); //possibly process res dtl to make it more usable
+                        process.exit(0);
+                    })
+                    .catch((err) => {
+                        lib.errors.reportError(err);
+                        process.exit(1);
+                    });
+            })
+            .catch((err) => {
+                lib.errors.reportError(err);
+                process.exit(1);
+            });
+    }).catch(err => {
+        lib.errors.reportError(err);
+        process.exit(1);
+    });
+}
+
 try {
     //initialize knex
     lib.logging.info('POLLING START');
@@ -60,46 +103,7 @@ try {
                 process.exit(0); 
         }
     } else {
-        let query = lib.queries.fetchDueMealPlans(db);
-        query.then((results) => {
-            let mailingMealPlans = joinjs.map(results, relationsMap, lib.constants.MAP_IDS.MEAL_PLANS, lib.constants.PREFIX.MEAL_PLANS + '_');
-            lib.helpers.getMealPlansForMailing(mailingMealPlans);
-            let promises = [];
-            let mpeIds = [];
-            mailingMealPlans.forEach(mp => {
-                mp.mealPlanEmails.forEach(mpe => {
-                    mpeIds.push(mpe.id);
-                    switch(mpe.email_type) {
-                        case lib.constants.EMAIL_TYPES.DELIVERY_READY:
-                            promises
-                            //where to get the user emails? mp.user.email...
-                                .push(lib.mailing.sendMealPlan(lib.constants.EMAIL_TEMPLATES.DELIVERY_READY, mp, mp.user.email));
-                            break;
-                        default:
-                            break;    
-                    }
-                });
-            });
-            Promise.all(promises)
-                .then((res) => {
-                    db('meal_plan_emails').update('has_sent', true).whereIn('id', mpeIds)
-                        .then(() => {
-                            lib.logging.info('POLLING END', res); //possibly process res dtl to make it more usable
-                            process.exit(0);
-                        })
-                        .catch((err) => {
-                            lib.errors.reportError(err);
-                            process.exit(1);
-                        });
-                })
-                .catch((err) => {
-                    lib.errors.reportError(err);
-                    process.exit(1);
-                });
-        }).catch(err => {
-            lib.errors.reportError(err);
-            process.exit(1);
-        });
+        setTimeout(sendMealPlansWithDB(db), 1000 * 60);
     }
 } catch(e) {
     //handle errors
