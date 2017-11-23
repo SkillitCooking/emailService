@@ -103,7 +103,9 @@ try {
                 process.exit(0); 
         }
     } else {
-        setTimeout(sendMealPlansWithDB(db), 1000 * 60);
+        setTimeout(function() {
+            sendMealPlansWithDB(db);
+        }, 1000 * 60);
     }
 } catch(e) {
     //handle errors
