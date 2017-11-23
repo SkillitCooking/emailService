@@ -36,6 +36,7 @@ function sendMealPlansWithDB(db) {
             .then((res) => {
                 db('meal_plan_emails').update('has_sent', true).whereIn('id', mpeIds)
                     .then(() => {
+                        console.log('here');
                         lib.logging.info('POLLING END', res); //possibly process res dtl to make it more usable
                         process.exit(0);
                     })
@@ -105,7 +106,7 @@ try {
     } else {
         setTimeout(function() {
             sendMealPlansWithDB(db);
-        }, 1000 * 60);
+        }, 1000 * 60 * 3);
     }
 } catch(e) {
     //handle errors
