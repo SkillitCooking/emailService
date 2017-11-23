@@ -12,6 +12,7 @@ const lib = require('./lib');
 const test = require('./test');
 
 function sendMealPlansWithDB(db) {
+    console.log('here here');
     let query = lib.queries.fetchDueMealPlans(db);
     query.then((results) => {
         let mailingMealPlans = joinjs.map(results, relationsMap, lib.constants.MAP_IDS.MEAL_PLANS, lib.constants.PREFIX.MEAL_PLANS + '_');
@@ -105,6 +106,7 @@ try {
         }
     } else {
         setTimeout(function() {
+            console.log('there');
             sendMealPlansWithDB(db);
         }, 1000 * 60 * 3);
     }
