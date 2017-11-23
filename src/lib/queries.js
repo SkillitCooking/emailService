@@ -21,6 +21,8 @@ function addMealPlanJoins(query, isLoadTest) {
     else query.leftJoin('meal_plans', 'meal_plan_emails.meal_plan', 'meal_plans.id');
     return query
         .leftJoin('users', 'meal_plans.user', 'users.id')
+        .leftJoin('meal_plan_ingredients', 'meal_plans.id', 'meal_plan_ingredients.meal_plan')
+        .leftJoin('ingredients as mp_ingredients', 'meal_plan_ingredients.ingredient', 'mp_ingredients.id')
         .leftJoin('recipe_meal_plans', 'meal_plans.id', 'recipe_meal_plans.meal_plan')
         .leftJoin('recipes', 'recipe_meal_plans.recipe', 'recipes.id')
         .leftJoin('steps', 'recipes.id', 'steps.recipe')
@@ -44,9 +46,11 @@ function addMealPlanSelects(query, isLoadTest) {
         .select(...mpeSelect,
             ...getSelectQueries('meal_plans', PREFIX.MEAL_PLANS, SELECT_FIELDS.MEAL_PLANS),
             ...getSelectQueries('recipe_meal_plans', PREFIX.RECIPE_MEAL_PLANS, SELECT_FIELDS.RECIPE_MEAL_PLANS),
+            ...getSelectQueries('mp_ingredients', PREFIX.MEAL_PLAN_INGREDIENTS, SELECT_FIELDS.MEAL_PLAN_INGREDIENTS),
             ...getSelectQueries('users', PREFIX.USERS, SELECT_FIELDS.USERS),
             ...getSelectQueries('recipes', PREFIX.RECIPES, SELECT_FIELDS.RECIPES),
             ...getSelectQueries('steps', PREFIX.STEPS, SELECT_FIELDS.STEPS),
+            ...getSelectQueries('recipe_seasonings', PREFIX.RECIPE_SEASONINGS, SELECT_FIELDS.RECIPE_SEASONINGS),
             ...getSelectQueries('seasonings', PREFIX.SEASONINGS, SELECT_FIELDS.SEASONINGS),
             ...getSelectQueries('ingredients', PREFIX.INGREDIENTS, SELECT_FIELDS.INGREDIENTS),
             ...getSelectQueries('tags', PREFIX.INGREDIENT_TAGS, SELECT_FIELDS.INGREDIENT_TAGS)

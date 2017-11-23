@@ -13,6 +13,7 @@ const relationsMap = [
         ],
         collections: [
             {name: 'recipes', mapId: MAP_IDS.RECIPES},
+            {name: 'ingredients', mapId: MAP_IDS.MEAL_PLAN_INGREDIENTS},
             {name: 'mealPlanEmails', mapId: MAP_IDS.MEAL_PLAN_EMAILS}
         ]
     },
@@ -39,6 +40,11 @@ const relationsMap = [
         ]
     },
     {
+        mapId: MAP_IDS.MEAL_PLAN_INGREDIENTS,
+        idProperty: {name: 'id', column: PREFIX.MEAL_PLAN_INGREDIENTS + '_id'},
+        properties: [...SELECT_FIELDS.MEAL_PLAN_INGREDIENTS.map(propWithPrefix(PREFIX.MEAL_PLAN_INGREDIENTS))]
+    },
+    {
         mapId: MAP_IDS.STEPS,
         idProperty: {name: 'id', column: PREFIX.STEPS + '_id'},
         properties: [...SELECT_FIELDS.STEPS.map(propWithPrefix(PREFIX.STEPS))]
@@ -58,7 +64,9 @@ const relationsMap = [
     {
         mapId: MAP_IDS.SEASONINGS,
         idProperty: {name: 'id', column: PREFIX.SEASONINGS + '_id'},
-        properties: [...SELECT_FIELDS.SEASONINGS.map(propWithPrefix(PREFIX.SEASONINGS))]
+        properties: [...SELECT_FIELDS.SEASONINGS.map(propWithPrefix(PREFIX.SEASONINGS)),
+            {name: 'order', column: PREFIX.RECIPE_SEASONINGS + '_present_order'}
+        ]
     }
 ];
 

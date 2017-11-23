@@ -24,8 +24,9 @@ try {
                         process.exit(1);
                     }
                     else {
-                        let mealPlan = JSON.parse(data);
-                        lib.mailing.sendMealPlan(lib.constants.EMAIL_TEMPLATES.DELIVERY_READY, mealPlan, 'danebratz@gmail.com')
+                        let mealPlans = [JSON.parse(data)];
+                        lib.helpers.getMealPlansForMailing(mealPlans);
+                        lib.mailing.sendMealPlan(lib.constants.EMAIL_TEMPLATES.DELIVERY_READY, mealPlans[0], 'danebratz@gmail.com')
                             .then((res) => {
                                 lib.logging.info('good', res);
                                 process.exit(0);

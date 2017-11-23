@@ -7,10 +7,12 @@ module.exports = Object.freeze({
         MEAL_PLANS: 'mp',
         RECIPES: 'r',
         RECIPE_MEAL_PLANS: 'rmp',
+        MEAL_PLAN_INGREDIENTS: 'mpi',
         STEPS: 'st',
         INGREDIENTS: 'i',
         INGREDIENT_TAGS: 'it',
-        SEASONINGS: 'se'
+        SEASONINGS: 'se',
+        RECIPE_SEASONINGS: 'rse'
     },
     MAP_IDS: {
         MEAL_PLANS: 'mealPlanMap',
@@ -18,6 +20,7 @@ module.exports = Object.freeze({
         RECIPES: 'recipeMap',
         USERS: 'userMap',
         STEPS: 'stepsMap',
+        MEAL_PLAN_INGREDIENTS: 'mpIngredientsMap',
         INGREDIENTS: 'ingredientsMap',
         SEASONINGS: 'seasoningsMap',
         INGREDIENT_TAGS: 'ingredientTagMap'
@@ -48,9 +51,17 @@ module.exports = Object.freeze({
             'id',
             'order'
         ],
+        MEAL_PLAN_INGREDIENTS: [
+            'id',
+            'name_singular'
+        ],
         SEASONINGS: [
             'id',
             'name'
+        ],
+        RECIPE_SEASONINGS: [
+            'id',
+            'present_order'
         ],
         INGREDIENTS: [
             'id',
