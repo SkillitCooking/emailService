@@ -108,7 +108,7 @@ try {
         setTimeout(function() {
             console.log('there');
             sendMealPlansWithDB(db);
-        }, 1000 * 60 * 3);
+        }, 1000 * 2);
     }
 } catch(e) {
     //handle errors
