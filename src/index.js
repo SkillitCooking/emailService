@@ -12,7 +12,6 @@ const lib = require('./lib');
 const test = require('./test');
 
 function sendMealPlansWithDB(db) {
-    console.log('here here');
     let query = lib.queries.fetchDueMealPlans(db);
     query.then((results) => {
         let mailingMealPlans = joinjs.map(results, relationsMap, lib.constants.MAP_IDS.MEAL_PLANS, lib.constants.PREFIX.MEAL_PLANS + '_');
@@ -37,7 +36,6 @@ function sendMealPlansWithDB(db) {
             .then((res) => {
                 db('meal_plan_emails').update('has_sent', true).whereIn('id', mpeIds)
                     .then(() => {
-                        console.log('here');
                         lib.logging.info('POLLING END', res); //possibly process res dtl to make it more usable
                         process.exit(0);
                     })
@@ -106,9 +104,8 @@ try {
         }
     } else {
         setTimeout(function() {
-            console.log('there');
             sendMealPlansWithDB(db);
-        }, 1000 * 2);
+        }, 1000 * 60 * 15);
     }
 } catch(e) {
     //handle errors
