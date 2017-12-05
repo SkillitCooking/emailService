@@ -89,7 +89,9 @@ module.exports = Object.freeze({
         CATEGORY: 'CATEGORY'
     },
     EMAIL_TYPES: {
-        DELIVERY_READY: 'DELIVERY_EMAIL'
+        DELIVERY_READY: 'DELIVERY_EMAIL',
+        FIRST_REMINDER: 'FIRST_REMINDER',
+        SECOND_REMINDER: 'SECOND_REMINDER'
     },
     EMAIL_TEMPLATES: {
         DELIVERY_READY: 'mealPlan.hbs'
