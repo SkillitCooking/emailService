@@ -5,6 +5,7 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '../');
 const joinjs = require('join-js').default;
 const relationsMap = require('./relations-map').mealPlansMap;
+require('./lib/handlebarsHelpers');
 
 require('dotenv').config({path: path.join(ROOT, 'bin/.env')});
 const config = require('./config');
