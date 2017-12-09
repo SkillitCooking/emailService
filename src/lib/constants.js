@@ -102,5 +102,6 @@ module.exports = Object.freeze({
         STARCH: 'starch',
         EXTRAS: 'extras',
         PRODUCE: 'produce'
-    }
+    },
+    LINEBREAK: '<br>'
 });

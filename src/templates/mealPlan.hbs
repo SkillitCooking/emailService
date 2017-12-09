@@ -16,7 +16,6 @@
                 {{#each ingredientCategories as |category|}}
                     <p><span class="category-name">{{pluralizeCategory category}}: </span><span class="category-ingredient">{{ingredientsList category.ingredients}}</span></p>
                 {{/each}}
-                <p><span class="category-name">Bonus: </span><span class="category-ingredient">{{ingredientsList ingredients}}</span></p>
             </div>
             
             
@@ -44,7 +43,7 @@
                     <ol>
                         {{#each recipe.steps as |step|}}
                             <li>
-                                <p>{{step.text}}</p>
+                                {{#step_text step}}{{/step_text}}
                                 {{#if step.main_link_url}}
                                     <a href="{{step.main_link_url}}">Link</a>
                                 {{/if}}

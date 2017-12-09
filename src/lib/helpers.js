@@ -51,6 +51,7 @@ const getMealPlansForMailing = (mealPlans) => {
         });
         let categoryArray = [];
         let categoryIterable = mp.ingredientCategories.entries();
+        let hasExtras = false;
         for(let entry of categoryIterable) {
             let categoryObj = {
                 name: entry[0],
@@ -61,7 +62,20 @@ const getMealPlansForMailing = (mealPlans) => {
             for(let imEntry of ingredientMapEntries) {
                 categoryObj.ingredients.push(imEntry[1]);
             }
+            if(categoryObj.name === CATEGORIES.EXTRAS) {
+                //then push meal plan ingredients
+                if(mp.ingredients && mp.ingredients.length > 0) {
+                    categoryObj.ingredients.push(...mp.ingredients);
+                }
+                hasExtras = true;
+            }
             categoryArray.push(categoryObj);
+        }
+        if(!hasExtras && mp.ingredients && mp.ingredients.length > 0) {
+            categoryArray.push({
+                name: CATEGORIES.EXTRAS,
+                ingredients: [...mp.ingredients]
+            });
         }
         categoryArray.sort(categoryCmpFn);
         mp.ingredientCategories = categoryArray;
