@@ -76,6 +76,26 @@ function fetchOneMealPlan(db) {
     return addMealPlanSelects(query, true);
 }
 
+/* ----> What about conditional selects? Joins?
+    *** Join on [condition]
+        ==> Basic idea: this.on(type = DELIVERY).orOn(type = REMINDER1)
+        ==> But more like:
+            ==> this.on(x.id = y.x).andOn(function() { this.on(type = DELIVERY); this.orOn(type = REMINDER1) })
+            ==> Could probably abstract the function of the inner type... figure out some way to bind the 
+                shit together such that the right number 'ons are applied', and wouldn't have to rewrite....
+    *** Select CASE - multiple CASE stmts
+        ==> CASE WHEN type = 'DELIVERY' THEN table.val WHEN type = 'REMINDER1' THEN table.val ELSE null END,
+        ==> CASE WHEN type = 'DELIVERY' THEN table.val1 WHEN type = 'REMINDER1' THEN table.val1 ELSE null END
+        ... will want to abstract this too
+            =>
+
+ */
+
+//query expected to be loaded up with 
+function fetchMealPlansAndData(query) {
+    
+}
+
 module.exports = {
     fetchDueMealPlans,
     fetchOneMealPlan
